@@ -14,8 +14,12 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
+from .views import SubmitBatchView, RetrieveObjectView, FilterObjectsView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('api/submit/', SubmitBatchView.as_view(), name='submit-batch'),
+    path('api/object/<str:object_id>/', RetrieveObjectView.as_view(), name='retrieve-object'),
+    path('api/objects/', FilterObjectsView.as_view(), name='filter-objects'),
 ]
